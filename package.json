@@ -85,13 +85,13 @@
     "use-mobile-detect-hook": "^1.0.5",
     "vite": "^6.2.6"
   },
-  "scripts": {
+"scripts": {
   "start": "craco start",
+  "dev": "vite",
+  "build:dev": "vite build --mode development",
   "build": "craco build",
   "gzip": "craco build && compress-cra",
-  "eject": "react-scripts eject",
-  "dev": "vite",
-  "build:dev": "vite build --mode development"
+  "eject": "react-scripts eject"
 }
 
   },
