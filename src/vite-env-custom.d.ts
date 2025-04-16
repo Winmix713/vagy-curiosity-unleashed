@@ -21,12 +21,12 @@ declare module 'react-day-picker';
 declare module 'embla-carousel-react' {
   import * as React from 'react';
   
-  type UseEmblaCarouselType = [
+  export type UseEmblaCarouselType = [
     (instance: HTMLElement | null) => void,
     EmblaCarouselType | null
   ];
   
-  interface EmblaCarouselType {
+  export interface EmblaCarouselType {
     canScrollNext: () => boolean;
     canScrollPrev: () => boolean;
     scrollNext: () => void;
@@ -37,18 +37,15 @@ declare module 'embla-carousel-react' {
     off: (event: string, callback: (api: EmblaCarouselType) => void) => void;
   }
   
-  interface UseEmblaCarouselOptions {
+  export interface UseEmblaCarouselOptions {
     axis?: 'x' | 'y';
     [key: string]: any;
   }
   
-  declare function useEmblaCarousel(
+  export function useEmblaCarousel(
     options?: UseEmblaCarouselOptions,
     plugins?: any[]
   ): UseEmblaCarouselType;
-  
-  export default useEmblaCarousel;
-  export type { EmblaCarouselType, UseEmblaCarouselOptions };
 }
 
 declare module 'cmdk';
@@ -71,6 +68,8 @@ declare module 'input-otp' {
     Context: React.Context<OTPInputContext>;
   };
 }
+
+// Add proper declaration for lovable-tagger module
 declare module 'lovable-tagger' {
   export function componentTagger(): any;
 }
