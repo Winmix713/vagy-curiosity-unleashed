@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { SplitVertical, History, QuestionMark } from "lucide-react";
+import { SplitHorizontal, History, HelpCircle } from "lucide-react";
 import DecisionForm from "@/components/DecisionForm";
 import ResultDisplay from "@/components/ResultDisplay";
 import SavedDecisions from "@/components/SavedDecisions";
@@ -28,7 +28,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
       <header className="w-full max-w-3xl text-center mb-8">
         <div className="flex items-center justify-center mb-2">
-          <SplitVertical className="h-8 w-8 mr-2 text-primary" />
+          <SplitHorizontal className="h-8 w-8 mr-2 text-primary" />
           <h1 className="text-4xl font-extrabold tracking-tight">vagy</h1>
         </div>
         <p className="text-xl text-muted-foreground">
@@ -45,7 +45,7 @@ const Index = () => {
         >
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="decide">
-              <QuestionMark className="h-4 w-4 mr-2" />
+              <HelpCircle className="h-4 w-4 mr-2" />
               Decide
             </TabsTrigger>
             <TabsTrigger value="history">
