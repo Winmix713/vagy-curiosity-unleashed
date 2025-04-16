@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { SplitHorizontal, History, HelpCircle } from "lucide-react";
+import { FlipHorizontal, History, HelpCircle } from "lucide-react";
 import DecisionForm from "@/components/DecisionForm";
 import ResultDisplay from "@/components/ResultDisplay";
 import SavedDecisions from "@/components/SavedDecisions";
@@ -28,7 +28,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
       <header className="w-full max-w-3xl text-center mb-8">
         <div className="flex items-center justify-center mb-2">
-          <SplitHorizontal className="h-8 w-8 mr-2 text-primary" />
+          <FlipHorizontal className="h-8 w-8 mr-2 text-primary" />
           <h1 className="text-4xl font-extrabold tracking-tight">vagy</h1>
         </div>
         <p className="text-xl text-muted-foreground">
