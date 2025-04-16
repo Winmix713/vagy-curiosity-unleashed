@@ -21,11 +21,6 @@ declare module 'react-day-picker';
 declare module 'embla-carousel-react' {
   import * as React from 'react';
   
-  export type UseEmblaCarouselType = [
-    (instance: HTMLElement | null) => void,
-    EmblaCarouselType | null
-  ];
-  
   export interface EmblaCarouselType {
     canScrollNext: () => boolean;
     canScrollPrev: () => boolean;
@@ -45,7 +40,7 @@ declare module 'embla-carousel-react' {
   export function useEmblaCarousel(
     options?: UseEmblaCarouselOptions,
     plugins?: any[]
-  ): UseEmblaCarouselType;
+  ): [(instance: HTMLElement | null) => void, EmblaCarouselType | null];
 }
 
 declare module 'cmdk';
