@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
@@ -92,7 +93,7 @@ const FormLabel = React.forwardRef<
 
   return (
     <Label
-      ref={ref}
+      ref={ref as React.Ref<HTMLLabelElement>}
       className={cn(error && "text-destructive", className)}
       htmlFor={formItemId}
       {...props}

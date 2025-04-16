@@ -15,7 +15,7 @@ const TooltipProvider: React.FC<TooltipProviderProps> = ({
 };
 TooltipProvider.displayName = "TooltipProvider";
 
-export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   content: React.ReactNode;
   open?: boolean;
   defaultOpen?: boolean;

@@ -83,21 +83,25 @@ const ToastClose = React.forwardRef<
 });
 ToastClose.displayName = "ToastClose";
 
-// Explicitly add properties to Toast for TypeScript
-interface ToastComponent
-  extends React.ForwardRefExoticComponent<
-    React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>
-  > {
+// Create proper type definitions for the Toast component and its subcomponents
+interface ToastCompoundComponent extends React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>> {
   Title: typeof ToastTitle;
   Description: typeof ToastDescription;
   Action: typeof ToastAction;
   Close: typeof ToastClose;
 }
 
-// Cast Toast to ToastComponent and assign sub-components
-(Toast as ToastComponent).Title = ToastTitle;
-(Toast as ToastComponent).Description = ToastDescription;
-(Toast as ToastComponent).Action = ToastAction;
-(Toast as ToastComponent).Close = ToastClose;
+// Convert Toast to a compound component
+const ToastComponent = Toast as ToastCompoundComponent;
+ToastComponent.Title = ToastTitle;
+ToastComponent.Description = ToastDescription;
+ToastComponent.Action = ToastAction;
+ToastComponent.Close = ToastClose;
 
-export { Toast, ToastTitle, ToastDescription, ToastAction, ToastClose };
+export { 
+  ToastComponent as Toast, 
+  ToastTitle, 
+  ToastDescription, 
+  ToastAction, 
+  ToastClose 
+};

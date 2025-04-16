@@ -1,9 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { Toast } from "./toast";
-import { ToastAction } from "./toast";
-import { ToastTitle } from "./toast";
-import { ToastDescription } from "./toast";
+import { Toast, ToastTitle, ToastDescription, ToastAction } from "./toast";
 
 type ToastProps = {
   id: string;

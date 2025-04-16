@@ -18,11 +18,59 @@ declare module '@radix-ui/react-toggle-group';
 declare module '@radix-ui/react-slider';
 declare module '@radix-ui/react-switch';
 declare module 'react-day-picker';
-declare module 'embla-carousel-react';
+declare module 'embla-carousel-react' {
+  import * as React from 'react';
+  
+  type UseEmblaCarouselType = [
+    (instance: HTMLElement | null) => void,
+    EmblaCarouselType | null
+  ];
+  
+  interface EmblaCarouselType {
+    canScrollNext: () => boolean;
+    canScrollPrev: () => boolean;
+    scrollNext: () => void;
+    scrollPrev: () => void;
+    scrollTo: (index: number) => void;
+    selectedScrollSnap: () => number;
+    on: (event: string, callback: (api: EmblaCarouselType) => void) => void;
+    off: (event: string, callback: (api: EmblaCarouselType) => void) => void;
+  }
+  
+  interface UseEmblaCarouselOptions {
+    axis?: 'x' | 'y';
+    [key: string]: any;
+  }
+  
+  declare function useEmblaCarousel(
+    options?: UseEmblaCarouselOptions,
+    plugins?: any[]
+  ): UseEmblaCarouselType;
+  
+  export default useEmblaCarousel;
+  export type { EmblaCarouselType, UseEmblaCarouselOptions };
+}
+
 declare module 'cmdk';
 declare module 'vaul';
 declare module 'react-resizable-panels';
-declare module 'input-otp';
+declare module 'input-otp' {
+  import * as React from 'react';
+
+  export interface SlotProps {
+    char: string;
+    hasFakeCaret: boolean;
+    isActive: boolean;
+  }
+
+  export interface OTPInputContext {
+    slots: SlotProps[];
+  }
+
+  export const OTPInput: React.ForwardRefExoticComponent<any> & {
+    Context: React.Context<OTPInputContext>;
+  };
+}
 declare module 'lovable-tagger';
 
 // Fix vite configuration

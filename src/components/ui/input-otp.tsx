@@ -1,5 +1,6 @@
+
 import * as React from "react"
-import { OTPInput, OTPInputContext } from "input-otp"
+import { OTPInput, SlotProps } from "input-otp"
 import { Dot } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -28,12 +29,17 @@ const InputOTPGroup = React.forwardRef<
 ))
 InputOTPGroup.displayName = "InputOTPGroup"
 
+interface InputOTPSlotProps extends React.ComponentPropsWithoutRef<"div"> {
+  index: number;
+}
+
 const InputOTPSlot = React.forwardRef<
   React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div"> & { index: number }
+  InputOTPSlotProps
 >(({ index, className, ...props }, ref) => {
-  const inputOTPContext = React.useContext(OTPInputContext)
-  const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index]
+  // We can safely cast here as the component will only be used within the OTPInput component
+  const inputOTPContext = React.useContext(OTPInput.Context);
+  const { char, hasFakeCaret, isActive } = (inputOTPContext as any).slots[index] as SlotProps;
 
   return (
     <div
