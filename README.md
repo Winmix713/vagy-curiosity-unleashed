@@ -1,73 +1,121 @@
-# Welcome to your Lovable project
+## Getting started
 
-## Project info
+#### Developed with:
 
-**URL**: https://lovable.dev/projects/57875055-a1cd-41ac-a1e6-22835e4a5f38
+- [React](https://reactjs.org/) - 18.2.0
+- [Node.js](https://nodejs.org/en/) - 18.12.1
 
-## How can I edit this code?
+First, install the dependencies using `npm install --legacy-peer-deps` or `yarn install`.
 
-There are several ways of editing your application.
+Then, run the development server:
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/57875055-a1cd-41ac-a1e6-22835e4a5f38) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+yarn start
+# OR
+npm run start
 ```
 
-**Edit a file directly in GitHub**
+Then, open [http://localhost:3000](http://localhost:3000) with your browser to see the result (if it doesn't open automatically).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+You can start editing pages or components. The page auto-updates as you edit and save a file.
 
-**Use GitHub Codespaces**
+To avoid any issues, please make sure you have the latest stable version of [Node.js](https://nodejs.org/en/) installed.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+If you need to have multiple versions of Node.js installed, you can use [nvm](https://github.com/nvm-sh/nvm).
 
-## What technologies are used for this project?
+### List of available scripts:
 
-This project is built with:
+Liga Dashboard Template is based on [Create-React-App](https://create-react-app.dev) template.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### `start`
 
-## How can I deploy this project?
+Runs the app in the development mode.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-Simply open [Lovable](https://lovable.dev/projects/57875055-a1cd-41ac-a1e6-22835e4a5f38) and click on Share -> Publish.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## Can I connect a custom domain to my Lovable project?
+### `build`
 
-Yes, you can!
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+The build is minified and the filenames include the hashes.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### `gzip`
+
+Builds the app for production to the `build` folder and compresses it with gzip and brotli.\
+If your server is configured to serve pre-compressed files, you can use this command to reduce the transfer size up to 70%.
+
+### `eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them.
+
+### How to customize icon font
+
+You can import *selection.json* located in `src/fonts/icomoon` back to the [IcoMoon app](https://icomoon.io/app) using the *Import Icons* button (or via Main Menu → Manage Projects) to retrieve icon selection.
+
+### How to use Google Analytics
+
+To use Google Analytics, you need to create a new project in [Google Analytics](https://analytics.google.com/analytics/web/) and get the tracking ID.
+
+Then, create a new file called *.env.local* in the root directory of your project and add the following line to it:
+
+```bash
+REACT_APP_PUBLIC_GA=YOUR_TRACKING_ID
+```
+
+------
+
+## File structure
+
+    .
+    ├── public                  # static files
+    │   ├── favicon.ico
+    │   ├── index.html          # main HTML file
+    │   ├── robots.txt
+    ├── src                     # source files
+    │   ├── app                 # redux store
+    │   ├── assets              # static assets
+    │   ├── components          # reusable components shared across the app
+    │   ├── constants           
+    │   ├── contexts            # context providers
+    │   ├── db                  # fake database
+    │   ├── features            # redux features (slices)
+    │   ├── fonts               
+    │   ├── hooks               # custom hooks
+    │   ├── layout              # main layout components (header, sidebar, etc.)
+    │   ├── pages               
+    │   ├── styles              # global styles
+    │   ├── ui                  # reusable UI components
+    │   ├── utils               # helper functions
+    │   ├── widgets             # reusable widgets
+    │   ├── App.js              # main app component
+    │   ├── index.js            # app entry point
+    │   ├── layouts.js          # layout object for react-grid-layout
+    │   ├── style.scss          # global app styles
+    ├── .htaccess                       # htaccess file for Apache server
+    ├── babel-plugin-macros.config.js   # babel macros config (for styled-components)
+    ├── craco.config.js                 # custom CRA config
+    ├── jsconfig.json                   # jsconfig for IDE
+    ├── package.json            
+
+## Third-party libraries
+
+- [React-spring](https://www.react-spring.io/) - animation library
+- [Recharts](http://recharts.org/en-US/) - charts
+- [React-select](https://react-select.com/home)
+- [Swiper](https://swiperjs.com/react) - slider
+- [React-toastify](https://fkhadra.github.io/react-toastify/introduction) - toast notifications
+- [MUI](https://mui.com/) - material ui components
+- [styled-components](https://styled-components.com/) - css-in-js
+- [dnd-kit](https://dndkit.com/) - drag and drop
+- [React Redux](https://react-redux.js.org/) - state management
+- [React Router](https://reactrouter.com/) - routing
+- [React Grid Layout](https://react-grid-layout.github.io/react-grid-layout/examples/0-showcase.html) - layout
+- [React Hook Form](https://react-hook-form.com/) - form validation
+- [React Big Calendar](http://jquense.github.io/react-big-calendar/examples/index.html) - scheduler
