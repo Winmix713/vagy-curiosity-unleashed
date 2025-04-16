@@ -1,4 +1,3 @@
-
 /// <reference types="vite/client" />
 
 // Fix for missing modules
@@ -64,7 +63,7 @@ declare module 'input-otp' {
   };
 }
 
-// Add proper declaration for lovable-tagger module
+// Add type declaration for lovable-tagger
 declare module 'lovable-tagger' {
   export function componentTagger(): any;
 }
