@@ -1,79 +1,55 @@
 
-import { toast } from "@/components/ui/use-toast";
-
-export type Decision = {
+export interface Decision {
   id: string;
   option1: string;
   option2: string;
   result: string;
   timestamp: number;
-};
+}
 
 export const makeDecision = (option1: string, option2: string): string => {
-  // Simple random decision between two options
+  // Simple 50/50 decision
   return Math.random() < 0.5 ? option1 : option2;
 };
 
-export const saveDecision = (decision: Omit<Decision, "id" | "timestamp">): Decision => {
-  const newDecision = {
-    ...decision,
+export const saveDecision = (decision: { option1: string; option2: string; result: string }): void => {
+  const savedDecisions = getSavedDecisions();
+  const newDecision: Decision = {
     id: generateId(),
-    timestamp: Date.now(),
+    option1: decision.option1,
+    option2: decision.option2,
+    result: decision.result,
+    timestamp: Date.now()
   };
   
-  try {
-    const savedDecisions = getSavedDecisions();
-    const updatedDecisions = [newDecision, ...savedDecisions];
-    
-    localStorage.setItem("savedDecisions", JSON.stringify(updatedDecisions));
-    toast({
-      title: "Decision saved!",
-      description: "Your decision has been saved successfully.",
-    });
-    
-    return newDecision;
-  } catch (error) {
-    console.error("Failed to save decision:", error);
-    toast({
-      variant: "destructive",
-      title: "Failed to save",
-      description: "Could not save your decision. Please try again.",
-    });
-    
-    return newDecision;
-  }
+  savedDecisions.push(newDecision);
+  localStorage.setItem('vagy-decisions', JSON.stringify(savedDecisions));
+  
+  // Trigger storage event for other components
+  window.dispatchEvent(new Event('storage'));
 };
 
 export const getSavedDecisions = (): Decision[] => {
+  const savedDecisionsString = localStorage.getItem('vagy-decisions');
+  if (!savedDecisionsString) return [];
+  
   try {
-    const savedDecisions = localStorage.getItem("savedDecisions");
-    return savedDecisions ? JSON.parse(savedDecisions) : [];
+    return JSON.parse(savedDecisionsString);
   } catch (error) {
-    console.error("Failed to retrieve saved decisions:", error);
+    console.error('Failed to parse saved decisions', error);
     return [];
   }
 };
 
 export const removeDecision = (id: string): void => {
-  try {
-    const savedDecisions = getSavedDecisions();
-    const updatedDecisions = savedDecisions.filter(decision => decision.id !== id);
-    
-    localStorage.setItem("savedDecisions", JSON.stringify(updatedDecisions));
-    toast({
-      title: "Decision removed",
-      description: "The decision has been removed from your saved list.",
-    });
-  } catch (error) {
-    console.error("Failed to remove decision:", error);
-    toast({
-      variant: "destructive",
-      title: "Failed to remove",
-      description: "Could not remove the decision. Please try again.",
-    });
-  }
+  const savedDecisions = getSavedDecisions();
+  const filteredDecisions = savedDecisions.filter(decision => decision.id !== id);
+  localStorage.setItem('vagy-decisions', JSON.stringify(filteredDecisions));
+  
+  // Trigger storage event for other components
+  window.dispatchEvent(new Event('storage'));
 };
 
 const generateId = (): string => {
-  return Math.random().toString(36).substring(2, 9);
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 };

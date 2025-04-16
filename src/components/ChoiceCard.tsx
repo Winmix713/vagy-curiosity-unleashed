@@ -7,7 +7,6 @@ interface ChoiceCardProps {
   option: string;
   isSelected?: boolean;
   isResult?: boolean;
-  onClick?: () => void;
   className?: string;
 }
 
@@ -15,27 +14,27 @@ const ChoiceCard: React.FC<ChoiceCardProps> = ({
   option, 
   isSelected = false, 
   isResult = false,
-  onClick,
   className
 }) => {
   return (
     <Card 
       className={cn(
-        "flex items-center justify-center p-6 transition-all duration-300 cursor-pointer h-40",
-        isSelected && "ring-2 ring-primary animate-pulse-slow",
-        isResult && "bg-primary text-primary-foreground shadow-lg animate-float",
-        !isResult && "hover:shadow-md hover:translate-y-[-5px]",
+        "overflow-hidden transition-all duration-200",
+        isSelected && "ring-2 ring-primary",
+        isResult && "bg-primary/10",
         className
       )}
-      onClick={onClick}
     >
-      <CardContent className="p-0 text-center">
-        <p className={cn(
-          "text-2xl font-bold break-words",
-          isResult ? "text-primary-foreground" : "text-foreground"
+      <CardContent className={cn(
+        "p-6 flex items-center justify-center text-center",
+        isResult && "py-8"
+      )}>
+        <h3 className={cn(
+          "font-bold break-words",
+          isResult ? "text-3xl text-primary" : "text-xl"
         )}>
           {option}
-        </p>
+        </h3>
       </CardContent>
     </Card>
   );
