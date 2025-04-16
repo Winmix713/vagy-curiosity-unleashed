@@ -44,6 +44,7 @@
     "craco": "^0.0.3",
     "dayjs": "^1.11.7",
     "lottie-react": "^2.4.0",
+    "lovable-tagger": "^1.1.8",
     "lucide-react": "^0.488.0",
     "moment": "^2.29.4",
     "nanoid": "^4.0.1",
