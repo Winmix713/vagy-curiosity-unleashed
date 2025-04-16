@@ -71,7 +71,12 @@ declare module 'input-otp' {
     Context: React.Context<OTPInputContext>;
   };
 }
-declare module 'lovable-tagger';
+declare module 'lovable-tagger' {
+  export function componentTagger(): any;
+}
 
 // Fix vite configuration
 declare module '@vitejs/plugin-react-swc';
+declare module 'vite' {
+  export function defineConfig(config: any): any;
+}

@@ -15,7 +15,7 @@ const TooltipProvider: React.FC<TooltipProviderProps> = ({
 };
 TooltipProvider.displayName = "TooltipProvider";
 
-export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
+export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   content: React.ReactNode;
   open?: boolean;
   defaultOpen?: boolean;
@@ -41,10 +41,11 @@ Tooltip.displayName = "Tooltip";
 
 const TooltipTrigger = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("inline-block", className)} {...props} />
-));
+  React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
+  const Comp = asChild ? React.Fragment : "div";
+  return <Comp ref={ref} className={cn("inline-block", className)} {...props} />;
+});
 TooltipTrigger.displayName = "TooltipTrigger";
 
 const TooltipContent = React.forwardRef<

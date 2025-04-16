@@ -37,9 +37,10 @@ const InputOTPSlot = React.forwardRef<
   React.ElementRef<"div">,
   InputOTPSlotProps
 >(({ index, className, ...props }, ref) => {
-  // We can safely cast here as the component will only be used within the OTPInput component
+  // We can safely access context as the component will only be used within the OTPInput component
   const inputOTPContext = React.useContext(OTPInput.Context);
-  const { char, hasFakeCaret, isActive } = (inputOTPContext as any).slots[index] as SlotProps;
+  const contextWithSlots = inputOTPContext as unknown as OTPInputContext;
+  const { char, hasFakeCaret, isActive } = contextWithSlots.slots[index];
 
   return (
     <div
@@ -71,5 +72,10 @@ const InputOTPSeparator = React.forwardRef<
   </div>
 ))
 InputOTPSeparator.displayName = "InputOTPSeparator"
+
+// Add the interface that was missing
+interface OTPInputContext {
+  slots: SlotProps[];
+}
 
 export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }

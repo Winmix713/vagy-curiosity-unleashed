@@ -541,8 +541,8 @@ const SidebarMenuButton = React.forwardRef<
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : "button"
-    const { isMobile, state } = useSidebar()
+    const Comp = asChild ? Slot : "button";
+    const { isMobile, state } = useSidebar();
 
     const button = (
       <Comp
@@ -553,22 +553,22 @@ const SidebarMenuButton = React.forwardRef<
         className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
         {...props}
       />
-    )
+    );
 
     if (!tooltip) {
-      return button
+      return button;
     }
 
     return (
       <Tooltip content={tooltip}>
-        <TooltipTrigger asChild>
+        <div className="inline-block">
           {button}
-        </TooltipTrigger>
+        </div>
       </Tooltip>
-    )
+    );
   }
 )
-SidebarMenuButton.displayName = "SidebarMenuButton"
+SidebarMenuButton.displayName = "SidebarMenuButton";
 
 const SidebarMenuAction = React.forwardRef<
   HTMLButtonElement,
