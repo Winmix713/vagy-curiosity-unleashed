@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { Toast } from "./toast";
 import { ToastAction } from "./toast";
+import { ToastTitle } from "./toast";
+import { ToastDescription } from "./toast";
 
 type ToastProps = {
   id: string;
@@ -35,8 +37,8 @@ export function Toaster() {
     <div className="fixed top-0 right-0 p-4 z-50 flex flex-col gap-2">
       {toasts.map((toast) => (
         <Toast key={toast.id}>
-          {toast.title && <Toast.Title>{toast.title}</Toast.Title>}
-          {toast.description && <Toast.Description>{toast.description}</Toast.Description>}
+          {toast.title && <ToastTitle>{toast.title}</ToastTitle>}
+          {toast.description && <ToastDescription>{toast.description}</ToastDescription>}
           {toast.action && <ToastAction altText="Dismiss">{toast.action}</ToastAction>}
         </Toast>
       ))}

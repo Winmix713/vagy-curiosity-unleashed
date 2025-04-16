@@ -8,48 +8,38 @@ export interface Decision {
 }
 
 export const makeDecision = (option1: string, option2: string): string => {
-  // Simple 50/50 decision
+  // Simple random selection
   return Math.random() < 0.5 ? option1 : option2;
 };
 
-export const saveDecision = (decision: { option1: string; option2: string; result: string }): void => {
-  const savedDecisions = getSavedDecisions();
+export const saveDecision = (decision: Omit<Decision, "id" | "timestamp">): void => {
   const newDecision: Decision = {
+    ...decision,
     id: generateId(),
-    option1: decision.option1,
-    option2: decision.option2,
-    result: decision.result,
-    timestamp: Date.now()
+    timestamp: Date.now(),
   };
+
+  const savedDecisions = getSavedDecisions();
+  localStorage.setItem("saved_decisions", JSON.stringify([...savedDecisions, newDecision]));
   
-  savedDecisions.push(newDecision);
-  localStorage.setItem('vagy-decisions', JSON.stringify(savedDecisions));
-  
-  // Trigger storage event for other components
-  window.dispatchEvent(new Event('storage'));
+  // Dispatch a storage event for other components to react
+  window.dispatchEvent(new Event("storage"));
 };
 
 export const getSavedDecisions = (): Decision[] => {
-  const savedDecisionsString = localStorage.getItem('vagy-decisions');
-  if (!savedDecisionsString) return [];
-  
-  try {
-    return JSON.parse(savedDecisionsString);
-  } catch (error) {
-    console.error('Failed to parse saved decisions', error);
-    return [];
-  }
+  const savedDecisions = localStorage.getItem("saved_decisions");
+  return savedDecisions ? JSON.parse(savedDecisions) : [];
 };
 
 export const removeDecision = (id: string): void => {
   const savedDecisions = getSavedDecisions();
-  const filteredDecisions = savedDecisions.filter(decision => decision.id !== id);
-  localStorage.setItem('vagy-decisions', JSON.stringify(filteredDecisions));
+  const updatedDecisions = savedDecisions.filter(decision => decision.id !== id);
+  localStorage.setItem("saved_decisions", JSON.stringify(updatedDecisions));
   
-  // Trigger storage event for other components
-  window.dispatchEvent(new Event('storage'));
+  // Dispatch a storage event for other components to react
+  window.dispatchEvent(new Event("storage"));
 };
 
 const generateId = (): string => {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  return Math.random().toString(36).substring(2, 15);
 };

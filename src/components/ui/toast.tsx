@@ -2,6 +2,15 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
+  title?: string;
+  description?: React.ReactNode;
+  action?: React.ReactNode;
+  duration?: number;
+}
+
+export type ToastActionElement = React.ReactElement<typeof ToastAction>;
+
 const Toast = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -74,8 +83,21 @@ const ToastClose = React.forwardRef<
 });
 ToastClose.displayName = "ToastClose";
 
+// Explicitly add properties to Toast for TypeScript
+interface ToastComponent
+  extends React.ForwardRefExoticComponent<
+    React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>
+  > {
+  Title: typeof ToastTitle;
+  Description: typeof ToastDescription;
+  Action: typeof ToastAction;
+  Close: typeof ToastClose;
+}
+
+// Cast Toast to ToastComponent and assign sub-components
+(Toast as ToastComponent).Title = ToastTitle;
+(Toast as ToastComponent).Description = ToastDescription;
+(Toast as ToastComponent).Action = ToastAction;
+(Toast as ToastComponent).Close = ToastClose;
+
 export { Toast, ToastTitle, ToastDescription, ToastAction, ToastClose };
-Toast.Title = ToastTitle;
-Toast.Description = ToastDescription;
-Toast.Action = ToastAction;
-Toast.Close = ToastClose;
