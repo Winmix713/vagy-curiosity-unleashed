@@ -86,10 +86,14 @@
     "vite": "^6.2.6"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "gzip": "craco build && compress-cra",
-    "eject": "react-scripts eject"
+  "start": "craco start",
+  "build": "craco build",
+  "gzip": "craco build && compress-cra",
+  "eject": "react-scripts eject",
+  "dev": "vite",
+  "build:dev": "vite build --mode development"
+}
+
   },
   "eslintConfig": {
     "extends": [
